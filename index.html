@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Loto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="titre text-center">
+            <h1>LE GRAND TIRAGE LOTO</h1>
+        </div>
+
+        <div class="centrer">
+            <div class="liste-tirage ">
+
+            </div>
+        </div>
+        <div class="bouton d-flex justify-content-center">
+            <button class="clique-moi">
+                CLIQUE MOI !
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+
+        const listeTirage = document.querySelector(".liste-tirage");
+        let tirageDone;
+
+        function tirageDeNumero() {
+            const tabTirage = [];
+            let i = 0;
+            let j = 0;
+            while (i < 5) {
+                let num = Math.floor(Math.random() * 49) + 1;
+                if (!tabTirage.includes(num)) {
+                    tabTirage.push(num);
+                    i++;
+                }
+            }
+            while (j < 2) {
+                let numEtoile = Math.ceil(Math.random() * 12);
+                if (!tabTirage.includes(numEtoile)) {
+                    tabTirage.push(numEtoile);
+                    j++;
+                }
+            }
+            return tabTirage;
+        }
+
+        function ajouterEnfantListeTirage(enfant) {
+            listeTirage.appendChild(enfant);
+        }
+
+        function construireTirage() {
+            tirageDone = tirageDeNumero();
+
+             //nettoyage de l'ancien tirage
+             while (listeTirage.firstChild) {
+                listeTirage.removeChild(listeTirage.firstChild);
+            }
+
+            tirageDone.forEach((nombre, index) => {
+
+                let nombreTexte = document.createElement("p");
+                nombreTexte.textContent = nombre;
+                nombreTexte.classList.add("nombre");
+
+                if (index < 5) {
+                    nombreTexte.classList.add("nombreBleu");
+                }
+                else {
+                    nombreTexte.classList.add("nombreEtoile");
+                }
+
+                setTimeout(function () {
+                    ajouterEnfantListeTirage(nombreTexte);
+                }
+                    , 500 * index);
+
+            });
+        }
+
+        document.querySelector('.clique-moi').addEventListener("click", function () {
+           
+            // constitution d'un nouveau tirage 
+            construireTirage();
+
+
+            console.log("tirage fait : " + tirageDone);
+        });
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+
+</html>

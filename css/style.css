@@ -1,0 +1,38 @@
+.container{
+    background-color: aqua;
+}
+
+.centrer{
+    display: flex;
+    justify-content: center;
+}
+
+.liste-tirage{
+    display: flex;
+    flex-direction: row;
+    background-color: aliceblue;
+    border-radius: 15px;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 40px;
+}
+
+.nombre{
+    margin: 5px;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.nombreBleu{    
+    background-color: lightblue;
+    
+}
+
+.nombreEtoile{
+    background-color: yellow;
+}

@@ -24,7 +24,9 @@
             <button class="clique-moi">
                 CLIQUE MOI !
             </button>
-            <progress class="barre-progress" value="0" max="100"></progress>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
         </div>
 
     </div>
@@ -33,7 +35,10 @@
         //Initialisation des variables
         const listeTirage = document.querySelector(".liste-tirage");
         const bouton = document.querySelector('.clique-moi');
-        const barreProgress = document.querySelector('.barre-progress');
+        let progressBar = document.getElementById('progress-bar');
+        let progressContainer = document.querySelector(".progress-container");
+        let width = 0;
+
         let tirageDone;
 
         //fonction pour tirer les numéros et retourner un tableau de ceux-ci
@@ -76,8 +81,7 @@
             }
 
             // Calcul du pourcentage d'avancement pour la barre de progression
-            let pourcentageAvancement = 0;
-            let incrementPourcentage = 100 / tirageDone.length;
+
 
             //constrution du nouvel affichage
             tirageDone.forEach((nombre, index) => {
@@ -94,11 +98,13 @@
                     nombreTexte.classList.add("nombreEtoile");
                 }
                 // affichage progressif du tirage
+                let incrementation = 100 / tirageDone.length
 
                 setTimeout(function () {
                     ajouterEnfantListeTirage(nombreTexte);
-                    pourcentageAvancement += incrementPourcentage;
-                    barreProgress.value = pourcentageAvancement;
+                    width += incrementation;
+                    progressBar.style.width = width + '%';
+                    progressBar.innerHTML = Math.ceil(width - 1) + '%';
                 }
                     , 500 * index);
             });
@@ -107,13 +113,16 @@
         document.querySelector('.clique-moi').addEventListener("click", function () {
             //cache le bouton :
             bouton.disabled = true;
+            width = 0;
             construireTirage();
             setTimeout(function () {
                 bouton.style.display = 'none';
-                barreProgress.style.display = 'block'
+                progressContainer.style.display = 'block';
+                progressBar.style.display = 'block';
                 setTimeout(function () {
                     bouton.style.display = 'block';
-                    barreProgress.style.display = 'none';
+                    progressContainer.style.display = 'none';
+                    progressBar.style.display = 'none';
                     bouton.disabled = false;
                 }, 3500);
             }, 0);

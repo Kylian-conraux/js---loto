@@ -67,13 +67,6 @@
         }
 
         /*
-            - Fonction qui ajoute des balises enfant à listeTirage
-        */
-        function ajouterEnfantListeTirage(enfant) {
-            listeTirage.appendChild(enfant);
-        }
-
-        /*
             - Fonction qui construit et affiche le tirage
         */
         function construireTirage() { 
@@ -89,8 +82,8 @@
                 nombreTexte.textContent = nombre;
                 nombreTexte.classList.add("nombre");
 
-                //les 5 premiers numéro serons ceux compris entre 1 à 49 serons sur un fond bleu
-                //et les autres seront ceux en étoiles
+                //Les 5 premiers numéro serons ceux compris entre 1 à 49 seront sur un fond bleu
+                //et les autres seront ceux en étoiles.
                 if (index < 5) {
                     nombreTexte.classList.add("nombreBleu");
                 }
@@ -100,7 +93,7 @@
                 // affichage progressif du tirage
                 let incrementation = 100 / tirageDone.length
                 setTimeout(function () {
-                    ajouterEnfantListeTirage(nombreTexte);
+                    listeTirage.appendChild(nombreTexte);
                     width += incrementation;
                     progressBar.style.width = width + '%';
                     progressBar.innerHTML = Math.ceil(width - 1) + '%';

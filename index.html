@@ -29,10 +29,11 @@
     </div>
 
     <script>
-
+        //Initialisation des variables
         const listeTirage = document.querySelector(".liste-tirage");
         let tirageDone;
 
+        //fonction pour tirer les numéros et retourner un tableau de ceux-ci
         function tirageDeNumero() {
             const tabTirage = [];
             let i = 0;
@@ -54,49 +55,48 @@
             return tabTirage;
         }
 
+        //fonction qui ajoute des balises enfant à listeTirage
         function ajouterEnfantListeTirage(enfant) {
             listeTirage.appendChild(enfant);
         }
 
+        //fonction qui construit et affiche le tirage
         function construireTirage() {
+            //tirage des numéro
             tirageDone = tirageDeNumero();
 
-             //nettoyage de l'ancien tirage
-             while (listeTirage.firstChild) {
+            //nettoyage de l'ancien affichage du tirage
+            while (listeTirage.firstChild) {
                 listeTirage.removeChild(listeTirage.firstChild);
             }
 
+            //constrution du nouvel affichage
             tirageDone.forEach((nombre, index) => {
 
                 let nombreTexte = document.createElement("p");
                 nombreTexte.textContent = nombre;
                 nombreTexte.classList.add("nombre");
-
+                //les 5 premiers numéro serons ceux compris entre 1 à 49 serons sur un fond bleu
+                //et les autres serons ceux en étoiles
                 if (index < 5) {
                     nombreTexte.classList.add("nombreBleu");
                 }
                 else {
                     nombreTexte.classList.add("nombreEtoile");
                 }
-
+                // affichage progressif du tirage
                 setTimeout(function () {
                     ajouterEnfantListeTirage(nombreTexte);
                 }
                     , 500 * index);
-
             });
         }
 
         document.querySelector('.clique-moi').addEventListener("click", function () {
-           
             // constitution d'un nouveau tirage 
             construireTirage();
-
-
             console.log("tirage fait : " + tirageDone);
         });
-
-
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

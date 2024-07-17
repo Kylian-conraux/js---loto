@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="titre text-center">
-            <h1>LE GRAND TIRAGE LOTO</h1>
+            <h1>LE GRAND TIRAGE DU LOTO</h1>
         </div>
 
         <div class="centrer">
@@ -24,6 +24,7 @@
             <button class="clique-moi">
                 CLIQUE MOI !
             </button>
+            <progress class="barre-progress" value="0" max="100"></progress>
         </div>
 
     </div>
@@ -31,6 +32,8 @@
     <script>
         //Initialisation des variables
         const listeTirage = document.querySelector(".liste-tirage");
+        const bouton = document.querySelector('.clique-moi');
+        const barreProgress = document.querySelector('.barre-progress');
         let tirageDone;
 
         //fonction pour tirer les numéros et retourner un tableau de ceux-ci
@@ -62,6 +65,8 @@
 
         //fonction qui construit et affiche le tirage
         function construireTirage() {
+            //caché le bouton pour pas cassé l'affichage : 
+
             //tirage des numéro
             tirageDone = tirageDeNumero();
 
@@ -69,6 +74,10 @@
             while (listeTirage.firstChild) {
                 listeTirage.removeChild(listeTirage.firstChild);
             }
+
+            // Calcul du pourcentage d'avancement pour la barre de progression
+            let pourcentageAvancement = 0;
+            let incrementPourcentage = 100 / tirageDone.length;
 
             //constrution du nouvel affichage
             tirageDone.forEach((nombre, index) => {
@@ -85,16 +94,30 @@
                     nombreTexte.classList.add("nombreEtoile");
                 }
                 // affichage progressif du tirage
+
                 setTimeout(function () {
                     ajouterEnfantListeTirage(nombreTexte);
+                    pourcentageAvancement += incrementPourcentage;
+                    barreProgress.value = pourcentageAvancement;
                 }
                     , 500 * index);
             });
         }
 
         document.querySelector('.clique-moi').addEventListener("click", function () {
-            // constitution d'un nouveau tirage 
+            //cache le bouton :
+            bouton.disabled = true;
             construireTirage();
+            setTimeout(function () {
+                bouton.style.display = 'none';
+                barreProgress.style.display = 'block'
+                setTimeout(function () {
+                    bouton.style.display = 'block';
+                    barreProgress.style.display = 'none';
+                    bouton.disabled = false;
+                }, 3500);
+            }, 0);
+            // constitution d'un nouveau tirage   
             console.log("tirage fait : " + tirageDone);
         });
     </script>

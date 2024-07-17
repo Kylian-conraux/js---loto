@@ -1,4 +1,9 @@
-.container {
+body,html{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
     background-color: rgb(20, 131, 131);
 }
 
@@ -36,7 +41,7 @@
 }
 
 .nombreEtoile {
-    clip-path: polygon(
+   clip-path: polygon(
             50% 0%,
             61% 35%,
             98% 35%,
@@ -49,4 +54,22 @@
             39% 35%);
 
     background-color: yellow;
+
+
+
 }
+
+.clique-moi{
+    background-color: gold;
+    font-weight: bold;
+    margin: 5px;
+    padding: 10px;
+}
+
+.barre-progress{
+    display: none;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+

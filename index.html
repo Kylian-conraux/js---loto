@@ -32,23 +32,26 @@
     </div>
 
     <script>
-        //Initialisation des variables
+        /*
+            - Initialisation des variables
+        */
         const listeTirage = document.querySelector(".liste-tirage");
         const bouton = document.querySelector('.clique-moi');
         let progressBar = document.getElementById('progress-bar');
         let progressContainer = document.querySelector(".progress-container");
         let width = 0;
-
         let tirageDone;
 
-        //fonction pour tirer les numéros et retourner un tableau de ceux-ci
+        /*
+            - Fonction pour tirer les numéros et retourner un tableau de ceux-ci
+        */
         function tirageDeNumero() {
             const tabTirage = [];
             let i = 0;
             let j = 0;
             while (i < 5) {
-                let num = Math.floor(Math.random() * 49) + 1;
-                if (!tabTirage.includes(num)) {
+                let num = Math.floor(Math.random() * 49) + 1; // arrondis pour inclure les chiffres de 1 à 49 
+                if (!tabTirage.includes(num)) { // Si 'num' n'est pas inclus dans le tableau tabTirage alors : 
                     tabTirage.push(num);
                     i++;
                 }
@@ -63,34 +66,31 @@
             return tabTirage;
         }
 
-        //fonction qui ajoute des balises enfant à listeTirage
+        /*
+            - Fonction qui ajoute des balises enfant à listeTirage
+        */
         function ajouterEnfantListeTirage(enfant) {
             listeTirage.appendChild(enfant);
         }
 
-        //fonction qui construit et affiche le tirage
-        function construireTirage() {
-            //caché le bouton pour pas cassé l'affichage : 
-
-            //tirage des numéro
-            tirageDone = tirageDeNumero();
+        /*
+            - Fonction qui construit et affiche le tirage
+        */
+        function construireTirage() { 
+            tirageDone = tirageDeNumero();  //tirage des numéro
 
             //nettoyage de l'ancien affichage du tirage
             while (listeTirage.firstChild) {
                 listeTirage.removeChild(listeTirage.firstChild);
             }
 
-            // Calcul du pourcentage d'avancement pour la barre de progression
-
-
-            //constrution du nouvel affichage
-            tirageDone.forEach((nombre, index) => {
-
+            tirageDone.forEach((nombre, index) => {  //constrution du nouvel affichage
                 let nombreTexte = document.createElement("p");
                 nombreTexte.textContent = nombre;
                 nombreTexte.classList.add("nombre");
+
                 //les 5 premiers numéro serons ceux compris entre 1 à 49 serons sur un fond bleu
-                //et les autres serons ceux en étoiles
+                //et les autres seront ceux en étoiles
                 if (index < 5) {
                     nombreTexte.classList.add("nombreBleu");
                 }
@@ -99,34 +99,40 @@
                 }
                 // affichage progressif du tirage
                 let incrementation = 100 / tirageDone.length
-
                 setTimeout(function () {
                     ajouterEnfantListeTirage(nombreTexte);
                     width += incrementation;
                     progressBar.style.width = width + '%';
                     progressBar.innerHTML = Math.ceil(width - 1) + '%';
                 }
-                    , 500 * index);
+                    , 500 * index);//délai de 500ms * index (taille du tableau)
             });
         }
 
+        /*
+            - Application de l'écouteur d'évènement sur le bouton clique-moi ! 
+        */
         document.querySelector('.clique-moi').addEventListener("click", function () {
-            //cache le bouton :
+            //désactive le bouton & reset la barre de progression :
             bouton.disabled = true;
             width = 0;
+            //construction tirage 
+
             construireTirage();
+            
+            //cache le bouton et le remplace par une barre de progression fluide
+            
             setTimeout(function () {
                 bouton.style.display = 'none';
                 progressContainer.style.display = 'block';
-                progressBar.style.display = 'block';
                 setTimeout(function () {
                     bouton.style.display = 'block';
                     progressContainer.style.display = 'none';
-                    progressBar.style.display = 'none';
                     bouton.disabled = false;
                 }, 3500);
             }, 0);
-            // constitution d'un nouveau tirage   
+            
+
             console.log("tirage fait : " + tirageDone);
         });
     </script>

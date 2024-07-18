@@ -34,6 +34,7 @@
         let progressContainer = document.querySelector(".progress-container");
         let width = 0;
         let tirageDone;
+        let delay = 400; //delay pour affichage des numéros et le temps de chargement
         /*
             - Fonction pour tirer les numéros et retourner un tableau de ceux-ci
         */
@@ -87,7 +88,7 @@
                     progressBar.style.width = width + '%';
                     progressBar.innerHTML = Math.ceil(width - 1) + '%';
                 }
-                    , 500 * index);//délai de 500ms * index (taille du tableau)
+                    , delay * index);//délais de 400ms * index (taille du tableau)
             });
         }
         /*
@@ -99,6 +100,7 @@
             width = 0;
             //construction tirage 
             construireTirage();
+            let delayTotal = delay * tirageDone.length
             //cache le bouton et le remplace par une barre de progression fluide
             setTimeout(function () {
                 bouton.style.display = 'none';
@@ -110,7 +112,7 @@
                     bouton.style.display = 'block';
                     progressContainer.style.display = 'none';
                     bouton.disabled = false;
-                }, 3500);
+                }, delayTotal );
             }, 0);
             console.log("tirage fait : " + tirageDone);
         });

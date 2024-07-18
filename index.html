@@ -31,11 +31,11 @@
         */
         const listeTirage = document.querySelector(".liste-tirage");
         const bouton = document.querySelector('.clique-moi');
-        let progressBar = document.getElementById('progress-bar');
-        let progressContainer = document.querySelector(".progress-container");
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.querySelector(".progress-container");
         let width = 0;
-        let tirageDone;
         let delay = 400; //delay pour affichage des numéros et le temps de chargement
+        let tirageDone = [];
         /*
             - Fonction pour tirer les numéros et retourner un tableau de ceux-ci
         */
@@ -113,7 +113,7 @@
                     bouton.style.display = 'block';
                     progressContainer.style.display = 'none';
                     bouton.disabled = false;
-                }, delayTotal );
+                }, delayTotal);
             }, 0);
             console.log("tirage fait : " + tirageDone);
         });

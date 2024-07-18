@@ -10,6 +10,7 @@ body,html{
 .centrer {
     display: flex;
     justify-content: center;
+    align-content: center;
 }
 
 .liste-tirage {
@@ -34,7 +35,6 @@ body,html{
     padding: 8px;
     width: 40px;
     height: 40px;
-   
     color: rgb(0, 0, 0);
     text-align: center;
     font-weight: bold;
@@ -43,7 +43,6 @@ body,html{
 .nombreBleu {
     border-radius: 100%;
     background-color: lightblue;
-
 }
 
 .nombreEtoile {
@@ -60,9 +59,6 @@ body,html{
             39% 35%);
 
     background-color: yellow;
-
-
-
 }
 
 .clique-moi{
@@ -89,4 +85,3 @@ body,html{
     color: white;
     transition: width 0.4s ease;
 }
-

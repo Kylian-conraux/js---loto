@@ -14,23 +14,16 @@
         <div class="titre text-center">
             <h1>LE GRAND TIRAGE DU LOTO</h1>
         </div>
-
         <div class="centrer">
-            <div class="liste-tirage ">
-
-            </div>
+            <div class="liste-tirage "></div>
         </div>
         <div class="bouton d-flex justify-content-center">
-            <button class="clique-moi">
-                CLIQUE MOI !
-            </button>
+            <button class="clique-moi">CLIQUE MOI !</button>
             <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
         </div>
-
     </div>
-
     <script>
         /*
             - Initialisation des variables
@@ -41,7 +34,6 @@
         let progressContainer = document.querySelector(".progress-container");
         let width = 0;
         let tirageDone;
-
         /*
             - Fonction pour tirer les numéros et retourner un tableau de ceux-ci
         */
@@ -65,18 +57,15 @@
             }
             return tabTirage;
         }
-
         /*
             - Fonction qui construit et affiche le tirage
         */
-        function construireTirage() { 
+        function construireTirage() {
             tirageDone = tirageDeNumero();  //tirage des numéro
-
             //nettoyage de l'ancien affichage du tirage
             while (listeTirage.firstChild) {
                 listeTirage.removeChild(listeTirage.firstChild);
             }
-
             tirageDone.forEach((nombre, index) => {  //constrution du nouvel affichage
                 let nombreTexte = document.createElement("p");
                 nombreTexte.textContent = nombre;
@@ -101,7 +90,6 @@
                     , 500 * index);//délai de 500ms * index (taille du tableau)
             });
         }
-
         /*
             - Application de l'écouteur d'évènement sur le bouton clique-moi ! 
         */
@@ -110,11 +98,8 @@
             bouton.disabled = true;
             width = 0;
             //construction tirage 
-
             construireTirage();
-            
             //cache le bouton et le remplace par une barre de progression fluide
-            
             setTimeout(function () {
                 bouton.style.display = 'none';
                 progressContainer.style.display = 'block';
@@ -127,17 +112,12 @@
                     bouton.disabled = false;
                 }, 3500);
             }, 0);
-            
-
             console.log("tirage fait : " + tirageDone);
         });
     </script>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
-
 
 </html>
